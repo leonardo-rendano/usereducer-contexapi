@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { ChangeEvent, useReducer } from "react";
 import { CounterReducer, initialValue } from "./reducers/CounterReducer";
 import { REDUCER_ACTION_TYPE } from "./reducers/types";
 
@@ -13,6 +13,10 @@ export default function App() {
     dispatch({ type: REDUCER_ACTION_TYPE.DECREMENT })
   }
 
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: REDUCER_ACTION_TYPE.NEW_INPUT, payload: e.target.value })
+  }
+
   return (
     <div>
       <h1>{state.counter}</h1>
@@ -20,6 +24,8 @@ export default function App() {
         <button onClick={handleIncrement}>+</button>
         <button onClick={handleDecrement}>-</button>
       </div>
+        <input type="text"  onChange={handleChangeInput}/>
+        <h2>{state.text}</h2>
     </div>
   )
 }
